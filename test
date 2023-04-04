@@ -1,4 +1,3 @@
-import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -6,6 +5,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 
 class Test():
+    CREATE_WISHLIST = (By.XPATH, '//button[normalize-space()="Create wishlist"]')
+
     def setup_method(self):
         self.driver = webdriver.Chrome()
         self.vars = {}
@@ -16,17 +17,33 @@ class Test():
     def test_proiect(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/")
         self.driver.set_window_size(1920, 1080)
+        self.driver.find_element(By.CSS_SELECTOR, "a > .hidden-sm-down").click()
+        self.driver.find_element(By.ID, "field-email").click()
+        self.driver.find_element(By.ID, "field-email").send_keys("test1@yahoo.com")
+        self.driver.find_element(By.ID, "field-password").click()
+        self.driver.find_element(By.ID, "field-password").send_keys("teste")
+        self.driver.find_element(By.ID, "submit-login").click()
         search = self.driver.find_element(by=By.NAME, value='s')
         search.send_keys('T-shirt')
         search.send_keys(Keys.ENTER)
-        time.sleep(2)
-        self.driver.find_element(By.CSS_SELECTOR, ".js-product:nth-child(1) img").click()
-        product_container = self.driver.find_element(By.CLASS_NAME, 'h1')
-        product_name = product_container.get_attribute('innerText')
+        t_shirt=WebDriverWait(self.driver, 20).until(lambda d:d.find_element(By.CSS_SELECTOR, ".js-product:nth-child(1) img"))
+        t_shirt.click()
+        self.driver.find_element(By.CLASS_NAME, 'h1')
+        self.driver.find_element(By.ID, "group_2")
+        check = self.driver.find_element(By.ID, "group_2")
+        check.find_element(By.XPATH, "//input[@title='Black']").click()
         self.driver.find_element(By.CSS_SELECTOR, ".wishlist-button-add > .material-icons").click()
-        time.sleep(2)
-        self.driver.find_element(By.CSS_SELECTOR, ".show .btn-primary").click()
-        self.driver.find_element(By.ID, "field-email").send_keys("test1@yahoo.com")
-        self.driver.find_element(By.ID, "field-password").send_keys("teste")
-        self.driver.find_element(By.ID, "submit-login").click()
-        assert product_name.lower() in self.driver.page_source.lower()
+        self.driver.find_element(By.CSS_SELECTOR, ".wishlist-add-to-new").click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.ID, "input2").send_keys("Nou")
+        self.driver.find_element(*self.CREATE_WISHLIST).click()
+        self.driver.implicitly_wait(2)
+        self.driver.find_element(By.CSS_SELECTOR,".wishlist-list-item:nth-child(2)").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".account > .hidden-sm-down").click()
+        self.driver.find_element(By.CSS_SELECTOR, "#wishlist-link .material-icons").click()
+        self.driver.find_element(By.XPATH, "//section[@id='content']/div/ul/li[2]/a/p").click()
+
+
+
+
+
