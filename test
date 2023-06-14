@@ -1,47 +1,59 @@
+import time
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver import ActionChains
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.ui import Select
 
 
-class Test():
-    CREATE_WISHLIST = (By.XPATH, '//button[normalize-space()="Create wishlist"]')
+class TestUser:
+
+    USERNAME = (By.ID, "field-email")
+    PASSWORD = (By.ID, "field-password")
+    LOGIN = (By.CSS_SELECTOR, "a > .hidden-sm-down")
 
     def setup_method(self):
         self.driver = webdriver.Chrome()
-        self.vars = {}
+        self.driver.maximize_window()
+        self.driver.implicitly_wait(2)
 
     def teardown_method(self):
         self.driver.quit()
 
-    def test_proiect(self):
+    def test_login(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/")
-        self.driver.set_window_size(1920, 1080)
-        self.driver.find_element(By.CSS_SELECTOR, "a > .hidden-sm-down").click()
-        self.driver.find_element(By.ID, "field-email").click()
-        self.driver.find_element(By.ID, "field-email").send_keys("test1@yahoo.com")
-        self.driver.find_element(By.ID, "field-password").click()
-        self.driver.find_element(By.ID, "field-password").send_keys("teste")
+        login = self.driver.find_element(*self.LOGIN)
+        login.click()
+        user = self.driver.find_element(*self.USERNAME)
+        user.send_keys("test@yahoo.com")
+        time.sleep(4)
+        user.clear()
+        user.send_keys("test1@yahoo.com")
+        password = self.driver.find_element(*self.PASSWORD)
+        password.send_keys("teste")
         self.driver.find_element(By.ID, "submit-login").click()
-        search = self.driver.find_element(by=By.NAME, value='s')
-        search.send_keys('T-shirt')
-        search.send_keys(Keys.ENTER)
-        t_shirt=WebDriverWait(self.driver, 20).until(lambda d:d.find_element(By.CSS_SELECTOR, ".js-product:nth-child(1) img"))
-        t_shirt.click()
-        self.driver.find_element(By.CLASS_NAME, 'h1')
-        self.driver.find_element(By.ID, "group_2")
-        check = self.driver.find_element(By.ID, "group_2")
-        check.find_element(By.XPATH, "//input[@title='Black']").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".wishlist-button-add > .material-icons").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".wishlist-add-to-new").click()
-        self.driver.implicitly_wait(2)
-        self.driver.find_element(By.ID, "input2").send_keys("Nou")
-        self.driver.find_element(*self.CREATE_WISHLIST).click()
-        self.driver.implicitly_wait(2)
-        self.driver.find_element(By.CSS_SELECTOR,".wishlist-list-item:nth-child(2)").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".account > .hidden-sm-down").click()
-        self.driver.find_element(By.CSS_SELECTOR, "#wishlist-link .material-icons").click()
-        self.driver.find_element(By.XPATH, "//section[@id='content']/div/ul/li[2]/a/p").click()
+        time.sleep(2)
+        self.driver.quit()
+
+    def test_jeans(self):
+        self.driver.get("https://prestashop-ta26.multibit.ro/en/")
+        menu_item = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID , "category-3")))
+        ActionChains(self.driver).move_to_element(menu_item).perform()
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID ,"category-4"))).click()
+        self.driver.quit()
+
+    def test_contact(self):
+        self.driver.get("https://prestashop-ta26.multibit.ro/en/contact-us")
+        assert "Contact" in self.driver.title
+        select = Select(self.driver.find_element(By.ID , "id_contact"))
+        select.select_by_value("1")
+        print("Contact selectat-" +select.first_selected_option.text)
+        assert "Webmaster" in select.first_selected_option.text
+        self.driver.quit()
+
+
+
 
 
 
