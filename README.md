@@ -1,14 +1,12 @@
-# testare
-Testare automata
+General Info
+Acesta este un proiect realziat in Pycharm 
 
-In cadrul acestui proiect am ales un site facut in prestashop pe care am facut diverse teste
-- conectarea la site-ul nostru
-- maximizarea ferestrei pagini web
-- crearea unui cont nou
-- cautarea unui tricou in search
-- schimbarea culori tricoului
-- adaugarea tricoului in wishlist
-- crearea unei noi wishlist
-- adaugarea tricoului in noul wishlist
-- verificarea wishlistului creat
-         
+Tehnologii folosite:
+python
+
+Setup
+Pentru a rula acest proiect trebuie instalat local pycharm
+https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=mac&code=PCC
+Dupa care cu ajutorul terminalului din pycharm si folosind pip instalam selenium
+
+
