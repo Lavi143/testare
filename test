@@ -13,12 +13,12 @@ class TestUser:
     PASSWORD = (By.ID, "field-password")
     LOGIN = (By.CSS_SELECTOR, "a > .hidden-sm-down")
 
-    def setup_method(self):
+    def setUp(self):
         self.driver = webdriver.Chrome()
         self.driver.maximize_window()
         self.driver.implicitly_wait(2)
 
-    def teardown_method(self):
+    def tearDown(self):
         self.driver.quit()
 
     def test_login_with_credentials(self):
