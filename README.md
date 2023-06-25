@@ -5,11 +5,13 @@ Tehnologii folosite:
 python
 
 Setup
+
 Pentru a rula acest proiect trebuie instalat local pycharm
 https://www.jetbrains.com/pycharm/download/download-thanks.html?platform=mac&code=PCC
 Dupa care cu ajutorul terminalului din pycharm si folosind pip instalam selenium
 
 Project
+
 In cadrul proiectului am creat o clasa TestUser
 Am definit metodele setUP si tearDown care se scriu inaintea fiecarui test pe care il rulam
 
