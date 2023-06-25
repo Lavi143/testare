@@ -21,12 +21,13 @@ class TestUser:
     def teardown_method(self):
         self.driver.quit()
 
-    def test_login(self):
+    def test_login_with_credentials(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/")
         login = self.driver.find_element(*self.LOGIN)
         login.click()
         user = self.driver.find_element(*self.USERNAME)
         user.send_keys("test@yahoo.com")
+        #user gresit
         time.sleep(4)
         user.clear()
         user.send_keys("test1@yahoo.com")
@@ -34,28 +35,22 @@ class TestUser:
         password.send_keys("teste")
         self.driver.find_element(By.ID, "submit-login").click()
         time.sleep(2)
-        self.driver.quit()
+        assert "Your account" in self.driver.page_source
 
-    def test_jeans(self):
+
+    def test_jeans_hover_menu(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/")
         menu_item = WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located((By.ID , "category-3")))
         ActionChains(self.driver).move_to_element(menu_item).perform()
         WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable((By.ID ,"category-4"))).click()
-        self.driver.quit()
+        assert "Jeans" in self.driver.title
 
-    def test_contact(self):
+
+
+    def test_contact_subject_select(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/contact-us")
         assert "Contact" in self.driver.title
         select = Select(self.driver.find_element(By.ID , "id_contact"))
         select.select_by_value("1")
         print("Contact selectat-" +select.first_selected_option.text)
         assert "Webmaster" in select.first_selected_option.text
-        self.driver.quit()
-
-
-
-
-
-
-
-
