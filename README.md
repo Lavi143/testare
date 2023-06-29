@@ -12,7 +12,7 @@ Testele efectuate:
 Observații și rezultate:
 * Nu am identificat bug-uri sau erori în timpul testării.
 * Riscuri potențiale ar putea include probleme de performanță în cazul în care numărul de utilizatori simultani crește semnificativ.
-* 
+  
 Concluzie:
 În urma testării efectuate, putem trage concluzia că aplicația PrestaShop se comportă conform așteptărilor și funcționalităților sale specifice. 
 
