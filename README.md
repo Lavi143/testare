@@ -8,7 +8,7 @@ Testele efectuate:
 * 		Testul "test_login_with_credentials" a verificat funcționalitatea de autentificare a utilizatorului, încercând să se autentifice cu diferite combinații de email și parolă și verificând rezultatul.
 * 		Testul "test_jeans_hover_menu" a testat funcționalitatea de hover pe meniul "Jeans" și selectarea opțiunii corespunzătoare.
 * 		Testul "test_contact_subject_select" a verificat corectitudinea selecției subiectului de contact în pagina de contact.
-*                 Testul "test_search_product" a verificat funcționalitatea motorului de cautarea search 
+*     Testul "test_search_product" a verificat funcționalitatea motorului de cautarea search 
 Observații și rezultate:
 * Nu am identificat bug-uri sau erori în timpul testării.
 * Riscuri potențiale ar putea include probleme de performanță în cazul în care numărul de utilizatori simultani crește semnificativ.
