@@ -49,3 +49,19 @@ class TestUser:
         select.select_by_value("1")
         print("Contact selectat-" +select.first_selected_option.text)
         assert "Webmaster" in select.first_selected_option.text
+
+    def test_add_to_cart(self):
+        self.driver.get("https://prestashop-ta26.multibit.ro/en/")
+        self.driver.find_element(By.CSS_SELECTOR, ".js-product:nth-child(1) img").click()
+        drop = Select(self.driver.find_element(By.ID, "group_1"))
+        drop.select_by_index('2')
+        time.sleep(2)
+        check = self.driver.find_element(By.ID, "group_2")
+        check.find_element(By.XPATH, "//*[@id='group_2']/li[2]/label/input").click()
+        time.sleep(2)
+        self.driver.find_element(By.CLASS_NAME, "bootstrap-touchspin-up").click()
+        self.driver.find_element(By.CLASS_NAME, "bootstrap-touchspin-up").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".add-to-cart").click()
+        time.sleep(2)
+        assert "Product successfully added to your shopping cart" in self.driver.page_source
+
