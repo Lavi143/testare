@@ -21,22 +21,17 @@ class TestUser:
     def tearDown(self):
         self.driver.quit()
 
-    def test_login_with_credentials(self):
+    def test_login_with_valid_credentials(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/")
         login = self.driver.find_element(*self.LOGIN)
         login.click()
         user = self.driver.find_element(*self.USERNAME)
-        user.send_keys("test@yahoo.com")
-        #user gresit
-        time.sleep(4)
-        user.clear()
         user.send_keys("test1@yahoo.com")
         password = self.driver.find_element(*self.PASSWORD)
         password.send_keys("teste")
         self.driver.find_element(By.ID, "submit-login").click()
         time.sleep(2)
         assert "Your account" in self.driver.page_source
-
 
     def test_jeans_hover_menu(self):
         self.driver.get("https://prestashop-ta26.multibit.ro/en/")
