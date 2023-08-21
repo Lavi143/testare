@@ -10,6 +10,11 @@ Testele efectuate:
 * 		Testul "test_contact_subject_select" a verificat corectitudinea selecției subiectului de contact în pagina de contact.
 *     Testul "test_search_product" a verificat funcționalitatea motorului de cautarea search
 *     Testul "test_add_to_cart" a verificat funcționalitatea pagini unui produs și selectarea opțiuniilor dorite.
+*     Testul "test_sort_by" a verificat funcționalitatea butonului de sortare
+*     Testul "test_filter" a verificat funcționalitate a filtrului filtrând prin categorie și preț un produs.
+*     Testul "test_change_language" verificat funcționalitatea modificările limbei din engleză în română.
+*     Testul "test_next_page" a verificat funcționalitatea scroll-ul pagini și butonul next.
+*     Testul "test_quick_view" a verificat funcționalitatea butonului Quick view pentru un produs.
 Observații și rezultate:
 * Nu am identificat bug-uri sau erori în timpul testării.
 * Riscuri potențiale ar putea include probleme de performanță în cazul în care numărul de utilizatori simultani crește semnificativ.
